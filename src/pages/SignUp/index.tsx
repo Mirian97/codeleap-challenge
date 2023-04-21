@@ -1,9 +1,63 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Button, InputLabel, Stack, styled } from '@mui/material'
+import Box from '@mui/material/Box'
+import Modal from 'components/Modal'
+import useGlobal from 'hooks/useGlobal'
+import { memo } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { usernameSchema } from 'schemas/username'
+import { StyledTextField } from 'theme/input'
+import { TUsername } from 'types/username'
+import { messageSuccess } from 'utils/toast'
+
+const StyledSignUpPage = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '100vh',
+  width: '100%'
+})
+
 const SignUp = () => {
+  const { setUsername } = useGlobal()
+  const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isDirty, isValid }
+  } = useForm<TUsername>({
+    resolver: yupResolver(usernameSchema)
+  })
+
+  const onSubmit: SubmitHandler<TUsername> = ({ username }) => {
+    messageSuccess('User successfully logged in!')
+    setTimeout(() => {
+      setUsername(username)
+      navigate('/main')
+    }, 2500)
+  }
+
   return (
-    <div className='App'>
-      <header className='App-header'>SignUp</header>
-    </div>
+    <StyledSignUpPage component='form' onSubmit={handleSubmit(onSubmit)}>
+      <Modal title='Welcome to CodeLeap network!' width={500}>
+        <InputLabel htmlFor='username'>Please enter your username</InputLabel>
+        <StyledTextField
+          id='username'
+          placeholder='John doe'
+          fullWidth
+          {...register('username')}
+          error={Boolean(errors.username)}
+          helperText={errors.username?.message ?? ''}
+        />
+        <Stack direction='row' justifyContent='flex-end' mt={2}>
+          <Button variant='contained' type='submit' disabled={!isDirty || !isValid}>
+            ENTER
+          </Button>
+        </Stack>
+      </Modal>
+    </StyledSignUpPage>
   )
 }
 
-export default SignUp
+export default memo(SignUp)
