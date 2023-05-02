@@ -56,6 +56,11 @@ const theme = createTheme({
       lineHeight: '2.4rem',
       fontWeight: 700
     },
+    h5: {
+      fontFamily: "'Roboto', sans-serif",
+      fontSize: '1.4rem',
+      lineHeight: '1.6rem'
+    },
     body1: {
       fontFamily: "'Roboto', sans-serif",
       fontSize: '1.8rem',
