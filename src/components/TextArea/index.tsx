@@ -28,6 +28,6 @@ const TextAreaRef: React.ForwardRefRenderFunction<HTMLInputElement, TextAreaProp
   )
 }
 
-const Input = forwardRef(TextAreaRef)
+const TextArea = forwardRef(TextAreaRef)
 
-export default Input
+export default TextArea

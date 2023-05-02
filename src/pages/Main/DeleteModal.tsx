@@ -10,7 +10,7 @@ const DeleteModal = () => {
 
   const handleDelete = async () => {
     try {
-      await deletePost(currentPost)
+      await deletePost(currentPost.id)
       toggleDeleteModal()
       handleGetPosts()
       messageSuccess('Post was deleted')
@@ -21,7 +21,7 @@ const DeleteModal = () => {
 
   return (
     <StyledBackdrop open={openDeleteModal}>
-      <Modal title='Are you sure you want to delete this item?'>
+      <Modal title='Are you sure you want to delete this item?' width={660}>
         <Stack direction='row' justifyContent='flex-end' gap={2} mt={5}>
           <Button variant='outlined' color='secondary' onClick={toggleDeleteModal}>
             Cancel
