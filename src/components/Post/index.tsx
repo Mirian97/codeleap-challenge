@@ -14,7 +14,7 @@ const StyledPost = styled(Paper)(({ theme }) => ({
 }))
 
 const Post = ({ title, username, created_datetime, content, id }: TPost) => (
-  <div>
+  <>
     <PostHeader title={title} username={username} id={id} />
     <StyledPost elevation={0}>
       <Stack p={3} gap={2}>
@@ -29,7 +29,7 @@ const Post = ({ title, username, created_datetime, content, id }: TPost) => (
         <Typography variant='body1'>{content}</Typography>
       </Stack>
     </StyledPost>
-  </div>
+  </>
 )
 
 export default Post

@@ -1,13 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, InputLabel, Stack, styled } from '@mui/material'
+import { Button, Stack, styled } from '@mui/material'
 import Box from '@mui/material/Box'
+import Input from 'components/Input'
 import Modal from 'components/Modal'
 import useGlobal from 'hooks/useGlobal'
 import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { usernameSchema } from 'schemas/username'
-import { StyledTextField } from 'theme/input'
 import { TUsername } from 'types/username'
 import { messageSuccess } from 'utils/toast'
 
@@ -39,22 +39,22 @@ const SignUp = () => {
   }
 
   return (
-    <StyledSignUpPage component='form' onSubmit={handleSubmit(onSubmit)}>
+    <StyledSignUpPage>
       <Modal title='Welcome to CodeLeap network!' width={500}>
-        <InputLabel htmlFor='username'>Please enter your username</InputLabel>
-        <StyledTextField
-          id='username'
-          placeholder='John doe'
-          fullWidth
-          {...register('username')}
-          error={Boolean(errors.username)}
-          helperText={errors.username?.message ?? ''}
-        />
-        <Stack direction='row' justifyContent='flex-end' mt={2}>
-          <Button variant='contained' type='submit' disabled={!isDirty || !isValid}>
-            ENTER
-          </Button>
-        </Stack>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            label='Please enter your username'
+            placeholder='John doe'
+            {...register('username')}
+            error={Boolean(errors.username)}
+            helperText={errors.username?.message ?? ''}
+          />
+          <Stack direction='row' justifyContent='flex-end' mt={2}>
+            <Button variant='contained' type='submit' disabled={!isDirty || !isValid}>
+              ENTER
+            </Button>
+          </Stack>
+        </form>
       </Modal>
     </StyledSignUpPage>
   )
