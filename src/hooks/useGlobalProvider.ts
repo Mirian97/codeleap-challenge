@@ -6,13 +6,21 @@ import { getPosts } from 'services/post'
 import { TPost } from 'types/post'
 import { messageError } from 'utils/toast'
 
+const defaultPost = {
+  id: 0,
+  username: '',
+  created_datetime: '',
+  title: '',
+  content: ''
+}
+
 const useGlobalContextProvider = () => {
   const navigate = useNavigate()
   const [username, setUsername, removeUsername] = useLocalStorage<string>('user')
   const [openEditModal, setOpenEditModal] = useState<boolean>(false)
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
   const [posts, setPosts] = useState<TPost[]>([])
-  const [currentPost, setCurrentPost] = useState<number>(0)
+  const [currentPost, setCurrentPost] = useState<TPost>(defaultPost)
   const toggleEditModal = () => setOpenEditModal(!openEditModal)
   const toggleDeleteModal = () => setOpenDeleteModal(!openDeleteModal)
 

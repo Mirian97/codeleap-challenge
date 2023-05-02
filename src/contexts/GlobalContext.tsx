@@ -12,8 +12,8 @@ interface IGlobalContextData {
   toggleDeleteModal: () => void
   posts: TPost[] | []
   setPosts: Dispatch<SetStateAction<TPost[]>>
-  currentPost: number
-  setCurrentPost: Dispatch<SetStateAction<number>>
+  currentPost: TPost
+  setCurrentPost: Dispatch<SetStateAction<TPost>>
   handleGetPosts: () => void
 }
 
