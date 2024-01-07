@@ -14,7 +14,6 @@ interface IGlobalContextData {
   setPosts: Dispatch<SetStateAction<TPost[]>>
   currentPost: TPost
   setCurrentPost: Dispatch<SetStateAction<TPost>>
-  handleGetPosts: () => void
 }
 
 const GlobalContext = createContext<IGlobalContextData>({} as IGlobalContextData)

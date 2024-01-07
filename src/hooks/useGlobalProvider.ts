@@ -2,9 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from 'react-use'
-import { getPosts } from 'services/post'
 import { TPost } from 'types/post'
-import { messageError } from 'utils/toast'
 
 const defaultPost = {
   id: 0,
@@ -24,19 +22,9 @@ const useGlobalContextProvider = () => {
   const toggleEditModal = () => setOpenEditModal(!openEditModal)
   const toggleDeleteModal = () => setOpenDeleteModal(!openDeleteModal)
 
-  const handleGetPosts = async () => {
-    try {
-      const { results } = await getPosts()
-      setPosts(results)
-    } catch (error) {
-      messageError('Unable to load posts')
-    }
-  }
-
   useEffect(() => {
     if (username) {
       navigate('/main')
-      handleGetPosts()
     }
   }, [username])
 
@@ -51,8 +39,7 @@ const useGlobalContextProvider = () => {
     posts,
     setPosts,
     currentPost,
-    setCurrentPost,
-    handleGetPosts
+    setCurrentPost
   }
 }
 
