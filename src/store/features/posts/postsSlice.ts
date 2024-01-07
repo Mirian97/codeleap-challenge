@@ -23,7 +23,6 @@ export const postSlice = createSlice({
         state.status = 'isLoading'
       })
       .addCase(getPostsThunk.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.status = 'idle'
         state.posts = action.payload.results
       })
