@@ -2,7 +2,9 @@ import { Box, Stack, styled } from '@mui/material'
 import Header from 'components/Header'
 import Post from 'components/Post'
 import useGlobal from 'hooks/useGlobal'
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from 'store/config/hook'
+import { getPostsThunk } from 'store/features/posts/postsSlice'
 import { StyledBackdrop } from 'theme/backdrop'
 import { TPost } from 'types/post'
 import DeleteModal from './DeleteModal'
@@ -17,7 +19,14 @@ const StyledMainPage = styled(Box)(({ theme }) => ({
 }))
 
 const Main = () => {
-  const { posts, openEditModal } = useGlobal()
+  const { openEditModal } = useGlobal()
+  const { posts } = useAppSelector((state) => state.post)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getPostsThunk())
+  }, [dispatch])
+
   return (
     <>
       <StyledMainPage>
