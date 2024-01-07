@@ -7,3 +7,7 @@ export type TPost = {
 }
 
 export type TSubmitPost = Pick<TPost, 'title' | 'content'>
+
+export type TPostResponse = {
+  results: Array<TPost>
+}
