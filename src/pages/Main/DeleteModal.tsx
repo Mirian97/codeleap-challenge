@@ -6,13 +6,12 @@ import { StyledBackdrop } from 'theme/backdrop'
 import { messageError, messageSuccess } from 'utils/toast'
 
 const DeleteModal = () => {
-  const { openDeleteModal, toggleDeleteModal, currentPost, handleGetPosts } = useGlobal()
+  const { openDeleteModal, toggleDeleteModal, currentPost } = useGlobal()
 
   const handleDelete = async () => {
     try {
       await deletePost(currentPost.id)
       toggleDeleteModal()
-      handleGetPosts()
       messageSuccess('Post was deleted')
     } catch (error) {
       messageError('Post was not deleted')

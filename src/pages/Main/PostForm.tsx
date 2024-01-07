@@ -24,7 +24,7 @@ const StyledPostForm = styled(Box)(({ theme }) => ({
 }))
 
 const PostForm = ({ type }: PostFormProps) => {
-  const { toggleEditModal, handleGetPosts, username, currentPost } = useGlobal()
+  const { toggleEditModal, username, currentPost } = useGlobal()
   const {
     reset,
     register,
@@ -48,7 +48,6 @@ const PostForm = ({ type }: PostFormProps) => {
         await createPost(body)
         messageSuccess('Post was created')
       }
-      handleGetPosts()
       reset()
     } catch (error) {
       messageError('Post was not edited')
