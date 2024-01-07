@@ -1,3 +1,13 @@
 import { TPost } from 'types/post'
 
-export const POSTS_INITIAL_STATE: Array<TPost> = []
+interface IPostsInitialState {
+  posts: Array<TPost>
+  status: 'isLoading' | 'idle' | 'error'
+  error: string
+}
+
+export const POSTS_INITIAL_STATE: IPostsInitialState = {
+  posts: [],
+  status: 'error',
+  error: ''
+}
