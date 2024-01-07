@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Stack, styled } from '@mui/material'
-import Box from '@mui/material/Box'
+import { Box, Button, Stack, styled } from '@mui/material'
 import Input from 'components/Input'
 import Modal from 'components/Modal'
 import useGlobal from 'hooks/useGlobal'

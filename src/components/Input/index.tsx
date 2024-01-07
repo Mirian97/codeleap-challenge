@@ -1,11 +1,26 @@
-import { InputLabel, Stack, StandardTextFieldProps } from '@mui/material'
+import { InputLabel, Stack, StandardTextFieldProps, styled } from '@mui/material'
+import TextField from '@mui/material/TextField'
 import { forwardRef, useId } from 'react'
-import { StyledTextField } from 'theme/input'
 
 interface InputProps extends StandardTextFieldProps {
   label: string
   placeholder: string
 }
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  root: {
+    border: `1px solid ${theme.palette.grey[300]}`
+  },
+
+  '.MuiInputBase-root': {
+    height: '32px',
+
+    '.MuiInputBase-input': {
+      ...theme.typography.h5,
+      padding: theme.spacing(1, 1.4)
+    }
+  }
+}))
 
 const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { label, placeholder, ...restProps }: InputProps,

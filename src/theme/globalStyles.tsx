@@ -18,19 +18,6 @@ const GlobalStyles: React.FC = (): JSX.Element => {
           width: '100%',
           minHeight: '100vh'
         },
-        input: {
-          '&[type=number]': {
-            MozAppearance: 'textfield',
-            '&::-webkit-outer-spin-button': {
-              margin: 0,
-              WebkitAppearance: 'none'
-            },
-            '&::-webkit-inner-spin-button': {
-              margin: 0,
-              WebkitAppearance: 'none'
-            }
-          }
-        },
         img: {
           display: 'block'
         },
