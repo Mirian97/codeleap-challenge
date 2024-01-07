@@ -1,19 +1,18 @@
-import { TPost } from 'types/post'
-import api from './api'
+import { TPost, TPostResponse } from 'types/post'
+import { requests } from './requests'
 
-export async function getPosts() {
-  const { data } = await api.get('/')
-  return data
+export const getPosts = (): Promise<TPostResponse> => {
+  return requests.get('/')
 }
 
-export async function createPost(body: Omit<TPost, 'id'>) {
-  await api.post('/', { ...body })
+export const createPost = (body: Omit<TPost, 'id'>): Promise<void> => {
+  return requests.post('/', { ...body })
 }
 
-export async function editPost(id: number, body: Omit<TPost, 'id'>) {
-  await api.patch(`/${id}/`, { ...body })
+export const editPost = (id: number, body: Omit<TPost, 'id'>): Promise<void> => {
+  return requests.patch(`/${id}/`, { ...body })
 }
 
-export async function deletePost(id: number) {
-  await api.delete(`/${id}/`)
+export const deletePost = (id: number): Promise<void> => {
+  return requests.delete(`/${id}/`)
 }
