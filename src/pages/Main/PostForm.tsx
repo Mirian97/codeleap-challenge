@@ -8,9 +8,10 @@ import useGlobal from 'hooks/useGlobal'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { postSchema } from 'schemas/post'
-import { createPost, editPost } from 'services/post'
+import { useAppDispatch } from 'store/config/hook'
+import { createPostThunk, editPostThunk } from 'store/features/posts/postsSlice'
 import { TSubmitPost } from 'types/post'
-import { messageError, messageSuccess } from 'utils/toast'
+import { messageSuccess } from 'utils/toast'
 
 interface PostFormProps {
   type?: 'create' | 'edit'
@@ -32,6 +33,8 @@ const PostForm = ({ type }: PostFormProps) => {
     formState: { errors, isDirty, isValid }
   } = useForm<TSubmitPost>({ resolver: yupResolver(postSchema) })
 
+  const dispatch = useAppDispatch()
+
   const onSubmit: SubmitHandler<TSubmitPost> = async (data) => {
     if (!username) return
     const body = {
@@ -39,19 +42,15 @@ const PostForm = ({ type }: PostFormProps) => {
       username,
       created_datetime: new Date().toISOString()
     }
-    try {
-      if (type === 'edit') {
-        await editPost(currentPost.id, body)
-        toggleEditModal()
-        messageSuccess('Post was edited')
-      } else {
-        await createPost(body)
-        messageSuccess('Post was created')
-      }
-      reset()
-    } catch (error) {
-      messageError('Post was not edited')
+    if (type === 'edit') {
+      dispatch(editPostThunk({ id: currentPost.id, body }))
+      toggleEditModal()
+      messageSuccess('Post was edited')
+    } else {
+      dispatch(createPostThunk(body))
+      messageSuccess('Post was created')
     }
+    reset()
   }
 
   useEffect(() => {
