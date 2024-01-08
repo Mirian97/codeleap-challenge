@@ -11,3 +11,5 @@ export type TSubmitPost = Pick<TPost, 'title' | 'content'>
 export type TPostResponse = {
   results: Array<TPost>
 }
+
+export type TPostWithoutId = Omit<TPost, 'id'>
