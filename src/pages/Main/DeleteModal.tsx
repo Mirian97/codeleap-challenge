@@ -1,16 +1,18 @@
 import { Button, Stack } from '@mui/material'
 import Modal from 'components/Modal'
 import useGlobal from 'hooks/useGlobal'
-import { deletePost } from 'services/post'
+import { useAppDispatch } from 'store/config/hook'
+import { deletePostThunk } from 'store/features/posts/postsSlice'
 import { StyledBackdrop } from 'theme/backdrop'
 import { messageError, messageSuccess } from 'utils/toast'
 
 const DeleteModal = () => {
   const { openDeleteModal, toggleDeleteModal, currentPost } = useGlobal()
+  const dispatch = useAppDispatch()
 
   const handleDelete = async () => {
     try {
-      await deletePost(currentPost.id)
+      dispatch(deletePostThunk({ id: currentPost.id }))
       toggleDeleteModal()
       messageSuccess('Post was deleted')
     } catch (error) {
