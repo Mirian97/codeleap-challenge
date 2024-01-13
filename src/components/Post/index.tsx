@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles'
 import { ReactComponent as DeleteIcon } from 'assets/delete-icon.svg'
 import { ReactComponent as EditIcon } from 'assets/edit-icon.svg'
 import useGlobal from 'hooks/useGlobal'
+import { useAppSelector } from 'store/config/hook'
 import { TPost } from 'types/post'
 import { getInterval } from 'utils/date'
 
@@ -27,12 +28,8 @@ interface PostProps {
 }
 
 const Post = ({ post }: PostProps) => {
-  const {
-    toggleDeleteModal,
-    toggleEditModal,
-    username: loggedUser,
-    setCurrentPost
-  } = useGlobal()
+  const { toggleDeleteModal, toggleEditModal, setCurrentPost } = useGlobal()
+  const loggedUser = useAppSelector((state) => state.user.name)
   const { title, content, username, created_datetime } = post
   const showEditAndDelete = username === loggedUser
 
