@@ -6,16 +6,16 @@ const userSlice = createSlice({
   name: 'user',
   initialState: USER_INITIAL_STATE,
   reducers: {
-    setName: (state, { payload }: PayloadAction<string>) => {
+    setUser: (state, { payload }: PayloadAction<string>) => {
       setItem('user', payload)
       state.name = payload
     },
-    removeName: (state) => {
+    removeUser: (state) => {
       removeItem('user')
       state.name = ''
     }
   }
 })
 
-export const { setName, removeName } = userSlice.actions
+export const { setUser, removeUser } = userSlice.actions
 export default userSlice.reducer
