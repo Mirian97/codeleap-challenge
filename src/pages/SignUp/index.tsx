@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { TUsernameSchema, usernameSchema } from 'schemas/username'
 import { useAppDispatch } from 'store/config/hook'
-import { setName } from 'store/features/user/userSlice'
+import { setUser } from 'store/features/user/userSlice'
 import { messageSuccess } from 'utils/toast'
 
 const StyledSignUpPage = styled(Box)({
@@ -33,7 +33,7 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<TUsernameSchema> = ({ username }) => {
     messageSuccess('User successfully logged in!')
     setTimeout(() => {
-      dispatch(setName(username))
+      dispatch(setUser(username))
       navigateToMainPage()
     }, 2500)
   }
