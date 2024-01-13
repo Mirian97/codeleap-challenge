@@ -1,13 +1,14 @@
 import { Button, Stack } from '@mui/material'
 import Modal from 'components/Modal'
 import useGlobal from 'hooks/useGlobal'
-import { useAppDispatch } from 'store/config/hook'
+import { useAppDispatch, useAppSelector } from 'store/config/hook'
 import { deletePostThunk } from 'store/features/posts/postsSlice'
 import { StyledBackdrop } from 'theme/backdrop'
 import { messageError, messageSuccess } from 'utils/toast'
 
 const DeleteModal = () => {
-  const { openDeleteModal, toggleDeleteModal, currentPost } = useGlobal()
+  const { openDeleteModal, toggleDeleteModal } = useGlobal()
+  const currentPost = useAppSelector((state) => state.currentPost)
   const dispatch = useAppDispatch()
 
   const handleDelete = async () => {
