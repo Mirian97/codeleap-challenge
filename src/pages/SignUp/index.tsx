@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Button, Stack, styled } from '@mui/material'
 import Input from 'components/Input'
