@@ -3,15 +3,10 @@ import { TPost } from 'types/post'
 import useGlobalProvider from '../hooks/useGlobalProvider'
 
 interface IGlobalContextData {
-  username: string | undefined
-  setUsername: (user: string | undefined) => void
-  removeUsername: () => void
   openEditModal: boolean
   openDeleteModal: boolean
   toggleEditModal: () => void
   toggleDeleteModal: () => void
-  posts: TPost[] | []
-  setPosts: Dispatch<SetStateAction<TPost[]>>
   currentPost: TPost
   setCurrentPost: Dispatch<SetStateAction<TPost>>
 }
