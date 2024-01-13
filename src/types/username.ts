@@ -1,3 +1,3 @@
 export type TUsername = {
-  username: string | undefined
+  username: string
 }
