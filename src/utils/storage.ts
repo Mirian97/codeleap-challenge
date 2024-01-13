@@ -8,7 +8,7 @@ export const getItem = (key: string) => {
   return JSON.parse(storage)
 }
 
-export const clearItem = (key: string) => {
+export const removeItem = (key: string) => {
   localStorage.removeItem(key)
 }
 
