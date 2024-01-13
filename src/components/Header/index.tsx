@@ -1,7 +1,8 @@
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
 import { AppBar, IconButton, Stack, Typography, styled } from '@mui/material'
-import useGlobal from 'hooks/useGlobal'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from 'store/config/hook'
+import { removeUser } from 'store/features/user/userSlice'
 import { messageSuccess } from 'utils/toast'
 
 const StyledHeader = styled(AppBar)(({ theme }) => ({
@@ -22,13 +23,13 @@ const StyledRoundedIcon = styled(LogoutRoundedIcon)({
 })
 
 const Header = () => {
-  const { removeUsername } = useGlobal()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const logout = () => {
     messageSuccess('You will be logged out')
     setTimeout(() => {
-      removeUsername()
+      dispatch(removeUser())
       navigate('/')
     }, 2500)
   }
