@@ -1,4 +1,3 @@
-import useGlobal from 'hooks/useGlobal'
 import Codeleap from 'pages/Codeleap'
 import Main from 'pages/Main'
 import SignUp from 'pages/SignUp'
@@ -6,9 +5,10 @@ import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { TRedirectTo } from 'types/redirectTo'
+import { getItem } from 'utils/storage'
 
 const ProtectedRoutes = ({ redirectTo }: TRedirectTo) => {
-  const { username } = useGlobal()
+  const username = getItem('user')
   const isAuthenticated = username
   return isAuthenticated ? <Outlet /> : <Navigate to={redirectTo} />
 }
