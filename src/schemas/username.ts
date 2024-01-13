@@ -5,3 +5,5 @@ const { fieldRequired } = messages
 export const usernameSchema = Yup.object().shape({
   username: Yup.string().required(fieldRequired).trim()
 })
+
+export type TUsernameSchema = Yup.InferType<typeof usernameSchema>
