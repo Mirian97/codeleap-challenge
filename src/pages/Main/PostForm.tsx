@@ -25,7 +25,8 @@ const StyledPostForm = styled(Box)(({ theme }) => ({
 }))
 
 const PostForm = ({ type }: PostFormProps) => {
-  const { toggleEditModal, currentPost } = useGlobal()
+  const currentPost = useAppSelector((state) => state.currentPost)
+  const { toggleEditModal } = useGlobal()
   const {
     reset,
     register,
