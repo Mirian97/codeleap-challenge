@@ -1,12 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Button, Stack, styled } from '@mui/material'
 import Input from 'components/Input'
 import Modal from 'components/Modal'
-import useGlobal from 'hooks/useGlobal'
 import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { usernameSchema } from 'schemas/username'
+import { useAppDispatch } from 'store/config/hook'
+import { setName } from 'store/features/user/userSlice'
 import { TUsername } from 'types/username'
 import { messageSuccess } from 'utils/toast'
 
@@ -19,8 +21,9 @@ const StyledSignUpPage = styled(Box)({
 })
 
 const SignUp = () => {
-  const { setUsername } = useGlobal()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const navigateToMainPage = () => navigate('/main')
   const {
     register,
     handleSubmit,
@@ -32,8 +35,8 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<TUsername> = ({ username }) => {
     messageSuccess('User successfully logged in!')
     setTimeout(() => {
-      setUsername(username)
-      navigate('/main')
+      dispatch(setName(username))
+      navigateToMainPage()
     }, 2500)
   }
 
