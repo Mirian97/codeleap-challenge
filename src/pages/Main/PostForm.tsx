@@ -25,17 +25,17 @@ const StyledPostForm = styled(Box)(({ theme }) => ({
 }))
 
 const PostForm = ({ type }: PostFormProps) => {
+  const dispatch = useAppDispatch()
   const currentPost = useAppSelector((state) => state.currentPost)
+  const username = useAppSelector((state) => state.user.name)
   const { toggleEditModal } = useGlobal()
+
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid }
   } = useForm<TSubmitPost>({ resolver: yupResolver(postSchema) })
-
-  const dispatch = useAppDispatch()
-  const username = useAppSelector((state) => state.user.name)
 
   const onSubmit: SubmitHandler<TSubmitPost> = async (data) => {
     const body = {
