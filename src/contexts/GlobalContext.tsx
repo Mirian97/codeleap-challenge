@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction, createContext } from 'react'
-import { TPost } from 'types/post'
+import { createContext } from 'react'
 import useGlobalProvider from '../hooks/useGlobalProvider'
 
 interface IGlobalContextData {
@@ -7,8 +6,6 @@ interface IGlobalContextData {
   openDeleteModal: boolean
   toggleEditModal: () => void
   toggleDeleteModal: () => void
-  currentPost: TPost
-  setCurrentPost: Dispatch<SetStateAction<TPost>>
 }
 
 const GlobalContext = createContext<IGlobalContextData>({} as IGlobalContextData)
