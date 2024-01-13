@@ -8,7 +8,7 @@ import useGlobal from 'hooks/useGlobal'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { postSchema } from 'schemas/post'
-import { useAppDispatch } from 'store/config/hook'
+import { useAppDispatch, useAppSelector } from 'store/config/hook'
 import { createPostThunk, editPostThunk } from 'store/features/posts/postsSlice'
 import { TSubmitPost } from 'types/post'
 import { messageSuccess } from 'utils/toast'
@@ -25,7 +25,7 @@ const StyledPostForm = styled(Box)(({ theme }) => ({
 }))
 
 const PostForm = ({ type }: PostFormProps) => {
-  const { toggleEditModal, username, currentPost } = useGlobal()
+  const { toggleEditModal, currentPost } = useGlobal()
   const {
     reset,
     register,
@@ -34,9 +34,9 @@ const PostForm = ({ type }: PostFormProps) => {
   } = useForm<TSubmitPost>({ resolver: yupResolver(postSchema) })
 
   const dispatch = useAppDispatch()
+  const username = useAppSelector((state) => state.user.name)
 
   const onSubmit: SubmitHandler<TSubmitPost> = async (data) => {
-    if (!username) return
     const body = {
       ...data,
       username,
