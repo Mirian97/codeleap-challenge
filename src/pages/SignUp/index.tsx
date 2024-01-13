@@ -6,10 +6,9 @@ import Modal from 'components/Modal'
 import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { usernameSchema } from 'schemas/username'
+import { TUsernameSchema, usernameSchema } from 'schemas/username'
 import { useAppDispatch } from 'store/config/hook'
 import { setName } from 'store/features/user/userSlice'
-import { TUsername } from 'types/username'
 import { messageSuccess } from 'utils/toast'
 
 const StyledSignUpPage = styled(Box)({
@@ -28,11 +27,11 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid }
-  } = useForm<TUsername>({
+  } = useForm<TUsernameSchema>({
     resolver: yupResolver(usernameSchema)
   })
 
-  const onSubmit: SubmitHandler<TUsername> = ({ username }) => {
+  const onSubmit: SubmitHandler<TUsernameSchema> = ({ username }) => {
     messageSuccess('User successfully logged in!')
     setTimeout(() => {
       dispatch(setName(username))
