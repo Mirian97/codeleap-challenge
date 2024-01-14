@@ -1,7 +1,6 @@
 import { Box, Stack, styled } from '@mui/material'
 import Header from 'components/Header'
 import Post from 'components/Post'
-import useGlobal from 'hooks/useGlobal'
 import { memo, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'store/config/hook'
 import { getPostsThunk } from 'store/features/posts/postsSlice'
@@ -19,8 +18,8 @@ const StyledMainPage = styled(Box)(({ theme }) => ({
 }))
 
 const Main = () => {
-  const { openEditModal } = useGlobal()
-  const { posts } = useAppSelector((state) => state.post)
+  const posts = useAppSelector((state) => state.post.posts)
+  const isOpenEditModal = useAppSelector((state) => state.modal.edit.isOpen)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const Main = () => {
           ))}
         </Stack>
       </StyledMainPage>
-      <StyledBackdrop open={openEditModal}>
+      <StyledBackdrop open={isOpenEditModal}>
         <PostForm type='edit' />
       </StyledBackdrop>
       <DeleteModal />

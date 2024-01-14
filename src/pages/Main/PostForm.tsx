@@ -4,11 +4,11 @@ import { Box, Button, Stack, styled } from '@mui/material'
 import Input from 'components/Input'
 import Modal from 'components/Modal'
 import TextArea from 'components/TextArea'
-import useGlobal from 'hooks/useGlobal'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { postSchema } from 'schemas/post'
 import { useAppDispatch, useAppSelector } from 'store/config/hook'
+import { closeModal } from 'store/features/modal/modalSlice'
 import { createPostThunk, editPostThunk } from 'store/features/posts/postsSlice'
 import { TSubmitPost } from 'types/post'
 import { messageSuccess } from 'utils/toast'
@@ -28,7 +28,7 @@ const PostForm = ({ type }: PostFormProps) => {
   const dispatch = useAppDispatch()
   const currentPost = useAppSelector((state) => state.currentPost)
   const username = useAppSelector((state) => state.user.name)
-  const { toggleEditModal } = useGlobal()
+  const closeDeleteModal = () => dispatch(closeModal({ modalName: 'edit' }))
 
   const {
     reset,
@@ -45,7 +45,7 @@ const PostForm = ({ type }: PostFormProps) => {
     }
     if (type === 'edit') {
       dispatch(editPostThunk({ id: currentPost.id, body }))
-      toggleEditModal()
+      closeDeleteModal()
       messageSuccess('Post was edited')
     } else {
       dispatch(createPostThunk(body))
@@ -85,7 +85,7 @@ const PostForm = ({ type }: PostFormProps) => {
         />
         <Stack direction='row' justifyContent='flex-end' gap={2}>
           {type === 'edit' && (
-            <Button variant='outlined' color='secondary' onClick={toggleEditModal}>
+            <Button variant='outlined' color='secondary' onClick={closeDeleteModal}>
               Cancel
             </Button>
           )}
